@@ -1,0 +1,5 @@
+Action,UID,Attendee Name,Host Name,Timestamp,User Agent,Platform,Language,Logger Source
+Action,UID,Attendee Name,Host Name,Timestamp,User Agent,Platform,Language,Logger Source
+join,12345,John Doe,Host User,2023-10-01T10:00:00Z,Chrome/91.0,Web,en,meeting
+leave,12345,John Doe,Host User,2023-10-01T10:30:00Z,Chrome/91.0,Web,en,meeting
+mute,67890,Jane Smith,Host User,2023-10-01T10:15:00Z,Safari/14.0,Web,en,meeting
