@@ -3,18 +3,27 @@ const fs = require('fs').promises;
 const fsSync = require('fs');
 const path = require('path');
 const cors = require('cors');
+
 const app = express();
 
 const LOG_DIR = '.';
 
+// Serve static frontend files (assuming frontend in 'public')
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Middleware for parsing JSON (if needed)
+app.use(express.json());
+
 // Use CORS middleware to allow requests from any origin
 app.use(cors({
-  origin: true, // Allow any origin
+  origin: true,
   credentials: true
 }));
 
-// Use express.json() to parse incoming JSON payloads
-app.use(express.json());
+// Fallback to index.html for SPA routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Endpoint to create an empty log file for a meeting when hosted
 app.post('/create-log-file', async (req, res) => {
@@ -188,35 +197,9 @@ app.get('/logs/download', async (req, res) => {
   }
 });
 
-// Optional: Route to handle the root URL
-// This provides a friendly message instead of "Cannot GET /"
-app.get('/', (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Download Meeting Logs CSV</title>
-    </head>
-    <body>
-      <h1>Download Meeting Logs CSV</h1>
-      <label for="meetingId">Meeting ID:</label>
-      <input type="text" id="meetingId" value="" placeholder="Enter meeting ID" />
-      <button id="downloadBtn">Download CSV Logs</button>
-      <script>
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-          const meetingId = document.getElementById('meetingId').value.trim();
-          const url = '/download-logs-excel' + (meetingId ? '?meetingId=' + encodeURIComponent(meetingId) : '');
-          window.location.href = url;
-        });
-      </script>
-    </body>
-    </html>
-  `);
-});
-
-// Start the server on port 5000
-app.listen(5000, () => {
-  console.log('🟢 Log server running on http://localhost:5000');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`🚀 Server running on port ${port}`);
 });
 
 // Handle unhandled promise rejections to prevent server crash

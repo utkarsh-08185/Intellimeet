@@ -1,3 +1,0 @@
-JOIN,239908614,,,2025-09-21T13:26:09.123Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine
-JOIN,226333020,,,2025-09-21T13:26:09.165Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine
-LEAVE,239908614,,,2025-09-21T13:26:32.317Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine

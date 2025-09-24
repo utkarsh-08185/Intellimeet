@@ -1,6 +1,0 @@
-LEAVE,265400510,,,2025-09-17T16:02:08.543Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine
-JOIN,213037892,,,2025-09-17T16:02:49.132Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine
-JOIN,239016818,,,2025-09-17T16:02:49.232Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine
-JOIN,213037893,,,2025-09-17T16:03:06.740Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine
-JOIN,213037893,,,2025-09-17T16:03:06.739Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine
-LEAVE,239016818,,,2025-09-17T17:50:28.787Z,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36,Win32,en-US,AgoraRTC-Engine

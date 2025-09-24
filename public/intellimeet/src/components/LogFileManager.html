@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Log File Manager</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  select, textarea, button { width: 100%; margin-top: 10px; }
+  textarea { height: 300px; font-family: monospace; }
+  .error { color: red; margin-top: 10px; }
+</style>
+</head>
+<body>
+<h1>Log File Manager</h1>
+<label for="fileList">Select Log File:</label>
+<select id="fileList"></select>
+<button id="loadBtn">Load File Content</button>
+<button id="saveBtn">Save Changes</button>
+<button id="downloadBtn">Download File</button>
+<div class="error" id="errorMsg"></div>
+<textarea id="fileContent" placeholder="File content will appear here..."></textarea>
+
+<script>
+  const fileList = document.getElementById('fileList');
+  const fileContent = document.getElementById('fileContent');
+  const errorMsg = document.getElementById('errorMsg');
+  const loadBtn = document.getElementById('loadBtn');
+  const saveBtn = document.getElementById('saveBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  async function fetchFileList() {
+    errorMsg.textContent = '';
+    try {
+      const res = await fetch('/logs/list');
+      if (!res.ok) throw new Error('Failed to fetch file list');
+      const files = await res.json();
+      fileList.innerHTML = '';
+      files.forEach(file => {
+        const option = document.createElement('option');
+        option.value = file;
+        option.textContent = file;
+        fileList.appendChild(option);
+      });
+    } catch (err) {
+      errorMsg.textContent = err.message;
+    }
+  }
+
+  async function loadFile() {
+    errorMsg.textContent = '';
+    const file = fileList.value;
+    if (!file) {
+      errorMsg.textContent = 'Please select a file';
+      return;
+    }
+    try {
+      const res = await fetch(`/logs/content?file=${encodeURIComponent(file)}`);
+      if (!res.ok) {
+        if (res.status === 404) throw new Error('File not found');
+        else if (res.status === 403) throw new Error('Permission denied');
+        else throw new Error('Failed to load file');
+      }
+      const text = await res.text();
+      fileContent.value = text;
+    } catch (err) {
+      errorMsg.textContent = err.message;
+    }
+  }
+
+  async function saveFile() {
+    errorMsg.textContent = '';
+    const file = fileList.value;
+    if (!file) {
+      errorMsg.textContent = 'Please select a file';
+      return;
+    }
+    try {
+      const res = await fetch('/logs/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ file, content: fileContent.value }),
+      });
+      if (!res.ok) {
+        if (res.status === 404) throw new Error('File not found');
+        else if (res.status === 403) throw new Error('Permission denied');
+        else throw new Error('Failed to save file');
+      }
+      alert('File saved successfully');
+    } catch (err) {
+      errorMsg.textContent = err.message;
+    }
+  }
+
+  function downloadFile() {
+    const file = fileList.value;
+    if (!file) {
+      errorMsg.textContent = 'Please select a file';
+      return;
+    }
+    window.location.href = `/logs/download?file=${encodeURIComponent(file)}`;
+  }
+
+  loadBtn.addEventListener('click', loadFile);
+  saveBtn.addEventListener('click', saveFile);
+  downloadBtn.addEventListener('click', downloadFile);
+
+  fetchFileList();
+</script>
+</body>
+</html>
